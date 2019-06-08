@@ -1,0 +1,54 @@
+% EEGLAB history file generated on the 06-Apr-2019
+% ------------------------------------------------
+
+EEG.etc.eeglabvers = '14.1.2'; % this tracks which version of EEGLAB is being used, you may ignore it
+EEG = pop_loadcnt('D:\Program Files\MATLAB\WorkDir\MA2_db_2018\MA2_data\20180628_MA2_LiangJF.cnt' , 'dataformat', 'auto', 'memmapfile', '');
+EEG = eeg_checkset( EEG );
+pop_eegplot_w( EEG, 1, 1, 1);
+EEG = pop_select( EEG,'nochannel',{'CZ' 'CPZ' 'BP4'});
+EEG.setname='LJF - data';
+EEG = eeg_checkset( EEG );
+EEG = eeg_checkset( EEG );
+EEG=pop_chanedit(EEG, 'load',{'D:\\Program Files\\MATLAB\\WorkDir\\MA2_db_2018\\20180628_MA2_EEG_ECG.asc' 'filetype' 'autodetect'},'delete',32);
+EEG = eeg_checkset( EEG );
+figure; topoplot([],EEG.chanlocs, 'style', 'blank',  'electrodes', 'labelpoint', 'chaninfo', EEG.chaninfo);
+figure; topoplot([],EEG.chanlocs, 'style', 'blank',  'electrodes', 'labelpoint', 'chaninfo', EEG.chaninfo);
+figure; topoplot([],EEG.chanlocs, 'style', 'blank',  'electrodes', 'labelpoint', 'chaninfo', EEG.chaninfo);
+figure; topoplot([],EEG.chanlocs, 'style', 'blank',  'electrodes', 'labelpoint', 'chaninfo', EEG.chaninfo);
+figure; topoplot([],EEG.chanlocs, 'style', 'blank',  'electrodes', 'numpoint', 'chaninfo', EEG.chaninfo);
+EEG = pop_select( EEG,'time',[58 428] );
+EEG.setname='LJF - data - baseline';
+EEG = eeg_checkset( EEG );
+% multiple datasets command: EEG = pop_loadset('filename',{'LJF_OverD.set' 'LJF_D2.set' 'LJF_D1.set' 'LJF_E2.set' 'LJF_E1.set' 'LJF_baseline.set'},'filepath','D:\\Program Files\\MATLAB\\WorkDir\\MA2_db_2018\\MA2_data\\20180628_MA2_LiangJF\\original\\');
+EEG = eeg_checkset( EEG );
+EEG = pop_eegfiltnew(EEG, [],1,4000,1,[],1);
+EEG = eeg_checkset( EEG );
+EEG = pop_eegfiltnew(EEG, [],45,600,0,[],1);
+EEG = eeg_checkset( EEG );
+EEG = eeg_checkset( EEG );
+EEG = eeg_checkset( EEG );
+EEG = eeg_checkset( EEG );
+EEG = pop_runica(EEG, 'extended',1,'interupt','on');
+EEG = eeg_checkset( EEG );
+EEG = eeg_checkset( EEG );
+EEG = eeg_checkset( EEG );
+EEG = pop_loadset('filename','LJF_bl_ica.set','filepath','D:\\LJF\\ica-decomposition\\baseline\\');
+EEG = eeg_checkset( EEG );
+pop_ADJUST_interface( LJF_bl_ica.set );
+EEG = pop_iclabel(EEG, default);
+EEG = eeg_checkset( EEG );
+EEG = eeg_checkset( EEG );
+EEG = pop_subcomp( EEG, [1   2  13  19  30  31], 0);
+EEG.setname='LJF - data - clean';
+EEG = eeg_checkset( EEG );
+EEG = pop_loadset('filename','LJF_bl_clean30.set','filepath','D:\\LJF\\ica-decomposition\\baseline\\');
+EEG = eeg_checkset( EEG );
+EEG = pop_select( EEG,'nochannel',{'BP3'});
+EEG = eeg_checkset( EEG );
+EEG = pop_loadset('filename','LJF_bl_icapruned30.set','filepath','H:\\LJF\\ica-decomposition\\baseline\\');
+EEG = eeg_checkset( EEG );
+EEG = pop_epoch( EEG, {  '3'  }, [0  5], 'newname', 'LJF - data - clean epochs', 'epochinfo', 'yes');
+EEG = eeg_checkset( EEG );
+EEG = eeg_checkset( EEG );
+EEG = pop_select( EEG,'notrial',54);
+EEG = eeg_checkset( EEG );
